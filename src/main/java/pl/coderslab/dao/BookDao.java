@@ -20,7 +20,7 @@ public class BookDao {
     }
 
     //    pobieranie po id
-    public Book findById(long id) {
+    public Book findById(Long id) {
         return entityManager.find(Book.class, id);
     }
 
