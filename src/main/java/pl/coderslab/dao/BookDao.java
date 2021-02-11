@@ -29,8 +29,15 @@ public class BookDao {
         entityManager.merge(book);
     }
 
-    //    usuwanie po id
+    //    usuwanie
     public void delete(Book book) {
+        entityManager.remove(entityManager.contains(book) ?
+                book : entityManager.merge(book));
+    }
+
+    //    usuwanie po id
+    public void deleteById(Long id) {
+        Book book = findById(id);
         entityManager.remove(entityManager.contains(book) ?
                 book : entityManager.merge(book));
     }
