@@ -1,6 +1,8 @@
 package pl.coderslab.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -11,6 +13,10 @@ public class Book {
     private String title;
     private int rating;
     private String description;
+    @ManyToOne
+    private Publisher publisher;
+    @ManyToMany
+    private List<Author> authors = new ArrayList<>();
 
     public Book() {
     }
@@ -48,6 +54,24 @@ public class Book {
 
     public Book setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public Book setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+        return this;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public Book setAuthors(List<Author> authors) {
+        this.authors = authors;
         return this;
     }
 
