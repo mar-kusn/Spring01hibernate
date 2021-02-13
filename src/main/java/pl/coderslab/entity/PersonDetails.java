@@ -13,6 +13,9 @@ public class PersonDetails {
     private int streetNumber;
     private String street;
     private String city;
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     public PersonDetails() {
     }
@@ -77,6 +80,23 @@ public class PersonDetails {
     public PersonDetails setCity(String city) {
         this.city = city;
         return this;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public PersonDetails setPerson(Person person) {
+        this.person = person;
+        return this;
+    }
+
+    public String getFullName() {
+        return this.getFirstName() + " " + this.getLastName();
+    }
+
+    public String getFullAddress() {
+        return this.getCity() + ", " + this.getStreet() + " " + this.getStreetNumber();
     }
 
     @Override

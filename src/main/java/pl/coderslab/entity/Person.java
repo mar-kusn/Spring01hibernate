@@ -11,6 +11,8 @@ public class Person {
     private String login;
     private String password;
     private String email;
+    @OneToOne(mappedBy = "person")
+    private PersonDetails personDetails;
 
     public Person() {
     }
@@ -54,6 +56,15 @@ public class Person {
 
     public Person setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public PersonDetails getPersonDetails() {
+        return personDetails;
+    }
+
+    public Person setPersonDetails(PersonDetails personDetails) {
+        this.personDetails = personDetails;
         return this;
     }
 
