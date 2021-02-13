@@ -6,6 +6,8 @@ import pl.coderslab.entity.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -40,5 +42,21 @@ public class BookDao {
         Book book = findById(id);
         entityManager.remove(entityManager.contains(book) ?
                 book : entityManager.merge(book));
+    }
+
+    // Dzień 2
+    public List<Book> findAll() {
+        final Query query = this.entityManager.createQuery("SELECT b FROM Book b");
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> findByRatingGTE(int rating) {
+        final Query query = this.entityManager.createQuery("SELECT b FROM Book b WHERE b.rating >= :toCompare");
+        query.setParameter("toCompare", rating);
+        final List<Book> books = query.getResultList();
+
+        return books;
     }
 }

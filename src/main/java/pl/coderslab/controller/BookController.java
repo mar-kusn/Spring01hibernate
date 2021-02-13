@@ -1,6 +1,7 @@
 package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,8 @@ import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
+
+import java.util.List;
 
 @Controller
 public class BookController {
@@ -107,4 +110,20 @@ public class BookController {
                 book.getRating() + "', Description: '" + book.getDescription() + "'";
     }
 
+    // dzień 2
+    @GetMapping("/book/list")
+    public String getBooks(Model model) {
+        List<Book> books = this.bookDao.findAll();
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/book/list-rating")
+    public String getBooksRatingGTE(@RequestParam int minRating, Model model) {
+        List<Book> books = this.bookDao.findByRatingGTE(minRating);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
 }
