@@ -1,11 +1,14 @@
 package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Publisher;
+
+import java.util.List;
 
 @Controller
 public class PublisherController {
@@ -52,5 +55,14 @@ public class PublisherController {
         publisherDao.deleteById(id);
 
         return "Deleted: " + publisher.getId() + ", Name: '" + publisher.getName() + "'";
+    }
+
+    // dzień 2
+    @GetMapping("/publisher/list")
+    public String getPublishers(Model model) {
+        List<Publisher> publishers = this.publisherDao.findAll();
+        model.addAttribute("publishers", publishers);
+
+        return "publisher/list";
     }
 }
