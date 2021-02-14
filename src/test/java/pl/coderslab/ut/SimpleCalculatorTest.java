@@ -87,6 +87,16 @@ public class SimpleCalculatorTest {
         assertEquals(8, actual);
     }
 
+    @Test
+    public void shouldAddTwoZeroNumbers() {
+        // given
+        SimpleCalculator simpleCalculator = new SimpleCalculator();
+        // when
+        int actual = simpleCalculator.add(0, 0);
+        // then
+        assertEquals(0, actual);
+    }
+
 
     // addPositive method tests
     @Test
@@ -137,6 +147,12 @@ public class SimpleCalculatorTest {
     public void shouldntAddZeroAndNegativeNumbers() {
         SimpleCalculator simpleCalculator = new SimpleCalculator();
         int actual = simpleCalculator.addPositve(0, -14);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldntAddZeroAndZeroNumbers() {
+        SimpleCalculator simpleCalculator = new SimpleCalculator();
+        int actual = simpleCalculator.addPositve(0, 0);
     }
 
 }
