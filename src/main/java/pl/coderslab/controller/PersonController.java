@@ -1,9 +1,8 @@
 package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.dao.PersonDao;
 import pl.coderslab.dao.PersonDetailsDao;
@@ -12,6 +11,7 @@ import pl.coderslab.entity.Person;
 import pl.coderslab.entity.PersonDetails;
 
 @Controller
+@RequestMapping("/person")
 public class PersonController {
     private final PersonDao personDao;
     private final PersonDetailsDao personDetailsDao;
@@ -21,7 +21,7 @@ public class PersonController {
         this.personDetailsDao = personDetailsDao;
     }
 
-    @GetMapping("/person/add/{login}/{password}/{email}/{firstName}/{lastName}/{city}/{street}/{streetNumber}")
+    @GetMapping("/add/{login}/{password}/{email}/{firstName}/{lastName}/{city}/{street}/{streetNumber}")
     @ResponseBody
     public String addPersonWithDetails(@PathVariable String login, @PathVariable String password,
                             @PathVariable String email, @PathVariable String firstName,
@@ -48,7 +48,7 @@ public class PersonController {
         return "Created: " + person.toString() + person.getPersonDetails().toString();
     }
 
-    @GetMapping("/person/update/{id}/{email}/{firstName}/{lastName}/{city}/{street}/{streetNumber}")
+    @GetMapping("/update/{id}/{email}/{firstName}/{lastName}/{city}/{street}/{streetNumber}")
     @ResponseBody
     public String updatePerson(@PathVariable Long id,
                                @PathVariable String email, @PathVariable String firstName,
@@ -69,7 +69,7 @@ public class PersonController {
         return "Updated: " + person.toString() + " " + personDetails.toString();
     }
 
-    @GetMapping("/person/get/{id}")
+    @GetMapping("/get/{id}")
     @ResponseBody
     public String getPerson(@PathVariable Long id) {
         Person person = personDao.readById(id);
@@ -77,7 +77,7 @@ public class PersonController {
         return person.toString() + person.getPersonDetails().toString();
     }
 
-    @GetMapping("/person/delete/{id}")
+    @GetMapping("/delete/{id}")
     @ResponseBody
     public String deletePerson(@PathVariable Long id) {
         Person person = personDao.readById(id);
@@ -85,5 +85,38 @@ public class PersonController {
         personDetailsDao.delete(person.getPersonDetails());
 
         return "Deleted: " + person.getId() + ", login: '" + person.getLogin() + "'";
+    }
+
+    // Dzień 2 - FORMULARZE
+    @GetMapping("/addform")
+    public String addForm() {
+        return "person/addform";
+    }
+
+    @PostMapping("/addform")
+    public String addFormPost(@RequestParam String login,
+                              @RequestParam String password,
+                              @RequestParam String email,
+                              Model m) {
+        Person person = new Person(login, password, email);
+        this.personDao.create(person);
+        m.addAttribute(person);
+
+        return "person/details";
+    }
+
+    @GetMapping("/addformbind")
+    public String addFormBind(Model m) {
+        m.addAttribute("person", new Person());
+
+        return "person/addform";
+    }
+    @PostMapping("/addformbind")
+    public String addFormBindPost(Person person,
+                                  Model m) {
+        this.personDao.create(person);
+        m.addAttribute("person", person);
+
+        return "person/details";
     }
 }
