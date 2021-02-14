@@ -30,6 +30,8 @@ public class Book {
     private List<Author> authors = new ArrayList<>();
     @Min(1)
     private int pages;
+    @ManyToOne
+    private Category category;
 
     public Book() {
     }
@@ -94,6 +96,15 @@ public class Book {
 
     public Book setPages(int pages) {
         this.pages = pages;
+        return this;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Book setCategory(Category category) {
+        this.category = category;
         return this;
     }
 

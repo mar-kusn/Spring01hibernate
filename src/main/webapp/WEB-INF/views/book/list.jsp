@@ -17,7 +17,7 @@
 <h2>Book list</h2>
 <a href="/bookform/add">Dodaj książkę</a><br />
 <table>
-    <tr><th>id</th><th>title</th><th>rating</th><th>publisher</th><th>description</th><th>Edit</th><th>Delete</th></tr>
+    <tr><th>id</th><th>title</th><th>rating</th><th>publisher</th><th>description</th><th>category</th><th>Edit</th><th>Delete</th></tr>
     <c:forEach items="${books}" var="book">
         <tr>
             <td>${book.id}</td>
@@ -25,6 +25,7 @@
             <td>${book.rating}</td>
             <td>${book.publisher}</td>
             <td>${book.description}</td>
+            <td>${book.category}</td>
             <td><a href="/bookform/edit/${book.id}">Edit</a></td>
             <td><a href="/bookform/delete/${book.id}">Delete</a></td>
         </tr>
