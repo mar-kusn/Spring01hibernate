@@ -49,6 +49,7 @@
     </div>
     <div>
         <form:hidden path="id" />
+        <form:hidden path="category.id" />
         <input type="submit"/>
     </div>
     <div>

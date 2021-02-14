@@ -20,8 +20,8 @@
     <table>
         <tr><th>id</th><th>Name</th></tr>
         <tr>
-            <td>${author.id}</td>
-            <td>${author.name}</td>
+            <td>${publisher.id}</td>
+            <td>${publisher.name}</td>
         </tr>
     </table>
 

@@ -55,7 +55,7 @@ public class BookRepoController {
         return "book/list";
     }
 
-    @GetMapping("/listbycategory/{title}")
+    @GetMapping("/listbycategory/{categoryId}")
     public String getBooksByCategory(@PathVariable long categoryId,
                                      Model model) {
         Category category = this.categoryRepository.getOne(categoryId);
@@ -91,4 +91,63 @@ public class BookRepoController {
         return "book/list";
     }
 
+    // dzień 4
+    @GetMapping("/listbycustomtitle/{title}")
+    public String getBooksByCustomTitle(@PathVariable String title,
+                                  Model model) {
+        List<Book> books = this.bookRepository.readCustomByTitle(title);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listbycustomcategory/{categoryId}")
+    public String getBooksByCustomCategory(@PathVariable long categoryId,
+                                     Model model) {
+        Category category = this.categoryRepository.getOne(categoryId);
+        List<Book> books = this.bookRepository.readCustomByCategorye(category);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/kilerwork/{firstLetter}")
+    public String kilerWork(@PathVariable String firstLetter) {
+        this.bookRepository.misterKillerDoYourJob(firstLetter);
+
+        return "book/list";
+    }
+
+
+    @GetMapping("/listbyrating3to5")
+    public String getBooksByCustomRating3To5(Model model) {
+        List<Book> books = this.bookRepository.readCustomRating3To5();
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listwithoutpubl")
+    public String getBooksWithoutPublisher(Model model) {
+        List<Book> books = this.bookRepository.readCustomWithoutPublisher();
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listbycatnamesortbytitle1/{categoryName}")
+    public String getBooksCustomByCategoryNameSortByTitle(@PathVariable String categoryName, Model model) {
+        List<Book> books = this.bookRepository.readCustomByCategoryNameSortByTitle(categoryName);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listbycatnamesortbytitlenative1/{categoryName}")
+    public String getBooksCustomByCategoryNameSortByTitleNative(@PathVariable String categoryName, Model model) {
+        List<Book> books = this.bookRepository.readCustomByCategoryNameSortByTitleNative(categoryName);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
 }
