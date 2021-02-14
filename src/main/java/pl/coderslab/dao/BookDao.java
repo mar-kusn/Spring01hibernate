@@ -1,5 +1,6 @@
 package pl.coderslab.dao;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.entity.Author;
@@ -92,5 +93,13 @@ public class BookDao {
         final List<Book> books = query.getResultList();
 
         return books;
+    }
+
+    //    pobieranie po id z autorami
+    public Book findByIdWithAuthors(long id) {
+        Book book = this.entityManager.find(Book.class, id);
+        Hibernate.initialize(book.getAuthors());
+
+        return book;
     }
 }
