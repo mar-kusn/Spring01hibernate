@@ -17,12 +17,14 @@
 <h2>Author list</h2>
 <a href="/authorform/add">Dodaj autora</a><br />
 <table>
-    <tr><th>id</th><th>First name</th><th>Last name</th><th>Edit</th><th>Delete</th></tr>
+    <tr><th>id</th><th>First name</th><th>Last name</th><th>PESEL</th><th>Email</th><th>Edit</th><th>Delete</th></tr>
     <c:forEach items="${authors}" var="author">
         <tr>
             <td>${author.id}</td>
             <td>${author.firstName}</td>
             <td>${author.lastName}</td>
+            <td>${author.pesel}</td>
+            <td>${author.email}</td>
             <td><a href="/authorform/edit/${author.id}">Edit</a></td>
             <td><a href="/authorform/delete/${author.id}">Delete</a></td>
         </tr>

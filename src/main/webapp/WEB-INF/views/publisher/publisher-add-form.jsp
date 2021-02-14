@@ -18,25 +18,25 @@
 <h2>Add Publisher</h2>
 <form:form method="post" modelAttribute="publisher">
     <div>
-        <label for="name">firstName</label>
+        <label for="name">Name</label>
         <form:input type="text" id="name" path="name"/>
         <form:errors path="name"/>
     </div>
     <div>
-        <label for="books">books</label>
+        <label for="books">Books</label>
         <form:select items="${books}" itemValue="id" itemLabel="title" id="books" path="books" multiple="true"/>
         <form:errors path="books"/>
     </div>
-    <%--<div>
-        <label for="pesel">pesel</label>
-        <form:input type="text" id="pesel" path="pesel" />
-        <form:errors path="pesel"/>
+    <div>
+        <label for="nip">NIP</label>
+        <form:input type="text" id="nip" path="nip" />
+        <form:errors path="nip"/>
     </div>
     <div>
-        <label for="email">email</label>
-        <form:input type="email" id="pesel" path="email" />
-        <form:errors path="email"/>
-    </div>--%>
+        <label for="regon">REGON</label>
+        <form:input type="regon" id="regon" path="regon" />
+        <form:errors path="regon"/>
+    </div>
     <div>
         <input type="submit"/>
     </div>

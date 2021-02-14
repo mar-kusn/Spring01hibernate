@@ -42,11 +42,11 @@
         <form:select items="${authors}" itemValue="id" itemLabel="fullName" id="authors" path="authors" multiple="true"/>
         <form:errors path="authors"/>
     </div>
-    <%--<div>
+    <div>
         <label for="pages">pages</label>
         <form:input type="number" id="pages" path="pages" />
         <form:errors path="pages"/>
-    </div>--%>
+    </div>
     <div>
         <input type="submit"/>
     </div>

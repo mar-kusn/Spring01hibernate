@@ -11,6 +11,7 @@ import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -40,7 +41,7 @@ public class BookFormController {
     }
 
     @PostMapping("/add")
-    public String add( Book book, BindingResult result) {
+    public String add(@Valid Book book, BindingResult result) {
 
         if (result.hasErrors()) {
             return "book/book-add-form";
@@ -59,7 +60,7 @@ public class BookFormController {
     }
 
     @PostMapping("/edit/{bookId}")
-    public String edit( Book book, BindingResult result) {
+    public String edit(@Valid Book book, BindingResult result) {
 
         if (result.hasErrors()) {
             return "book/book-edit-form";

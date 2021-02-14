@@ -32,7 +32,7 @@
         <form:select items="${books}" itemValue="id" itemLabel="title" id="books" path="books" multiple="true"/>
         <form:errors path="books"/>
     </div>
-    <%--<div>
+    <div>
         <label for="pesel">pesel</label>
         <form:input type="text" id="pesel" path="pesel" />
         <form:errors path="pesel"/>
@@ -41,7 +41,7 @@
         <label for="email">email</label>
         <form:input type="email" id="pesel" path="email" />
         <form:errors path="email"/>
-    </div>--%>
+    </div>
     <div>
         <input type="submit"/>
     </div>

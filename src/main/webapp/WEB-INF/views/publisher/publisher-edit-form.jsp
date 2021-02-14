@@ -28,6 +28,16 @@
         <form:errors path="books"/>
     </div>
     <div>
+        <label for="nip">nip</label>
+        <form:input type="text" id="nip" path="nip" />
+        <form:errors path="nip"/>
+    </div>
+    <div>
+        <label for="email">regon</label>
+        <form:input type="regon" id="regon" path="regon" />
+        <form:errors path="regon"/>
+    </div>
+    <div>
         <form:hidden path="id" />
         <input type="submit"/>
     </div>

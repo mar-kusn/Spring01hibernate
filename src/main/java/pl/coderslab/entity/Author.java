@@ -1,6 +1,10 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +14,16 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     @ManyToMany(mappedBy = "authors")
     private List<Book> books = new ArrayList<>();
+    @PESEL
+    private String pesel;
+    @Email
+    private String email;
 
     public Author() {
     }
@@ -55,6 +65,24 @@ public class Author {
 
     public Author setBooks(List<Book> books) {
         this.books = books;
+        return this;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public Author setPesel(String pesel) {
+        this.pesel = pesel;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Author setEmail(String email) {
+        this.email = email;
         return this;
     }
 

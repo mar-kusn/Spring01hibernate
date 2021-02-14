@@ -9,6 +9,7 @@ import pl.coderslab.dao.BookDao;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,7 +37,7 @@ public class AuthorFormController {
     }
 
     @PostMapping("/add")
-    public String add(Author author, BindingResult result) {
+    public String add(@Valid Author author, BindingResult result) {
 
         if (result.hasErrors()) {
             return "author/author-add-form";
@@ -55,7 +56,7 @@ public class AuthorFormController {
     }
 
     @PostMapping("/edit/{authorId}")
-    public String edit(Author author, BindingResult result) {
+    public String edit(@Valid Author author, BindingResult result) {
 
         if (result.hasErrors()) {
             return "author/author-edit-form";

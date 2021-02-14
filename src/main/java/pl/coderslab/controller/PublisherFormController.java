@@ -9,6 +9,7 @@ import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -38,7 +39,7 @@ public class PublisherFormController {
     }
 
     @PostMapping("/add")
-    public String add(Publisher publisher, BindingResult result) {
+    public String add(@Valid Publisher publisher, BindingResult result) {
 
         if (result.hasErrors()) {
             return "publisher/publisher-add-form";
@@ -57,7 +58,7 @@ public class PublisherFormController {
     }
 
     @PostMapping("/edit/{apubId}")
-    public String edit(Publisher publisher, BindingResult result) {
+    public String edit(@Valid Publisher publisher, BindingResult result) {
 
         if (result.hasErrors()) {
             return "publisher/publisher-edit-form";
