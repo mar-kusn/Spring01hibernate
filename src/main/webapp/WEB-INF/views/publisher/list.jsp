@@ -15,12 +15,15 @@
 <body>
 
 <h2>Publisher list</h2>
+<a href="/publisherform/add">Add publisher</a><br />
 <table>
-    <tr><th>id</th><th>Name</th></tr>
+    <tr><th>id</th><th>Name</th><th>Edit</th><th>Delete</th></tr>
     <c:forEach items="${publishers}" var="publisher">
         <tr>
             <td>${publisher.id}</td>
             <td>${publisher.name}</td>
+            <td><a href="/publisherform/edit/${publisher.id}">Edit</a></td>
+            <td><a href="/publisherform/delete/${publisher.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
