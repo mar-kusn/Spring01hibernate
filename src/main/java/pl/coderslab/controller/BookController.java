@@ -126,4 +126,39 @@ public class BookController {
 
         return "book/list";
     }
+
+    @GetMapping("/book/with-publisher")
+    public String getBooksWithPublisher(Model model) {
+        List<Book> books = this.bookDao.findBookWithAnyPublisher();
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+
+    @GetMapping("/book/publisherId/{pubId}")
+    public String getBooksWithPublisherId(@PathVariable Long pubId, Model model) {
+        Publisher p = this.publisherDao.findById(pubId);
+        List<Book> books = this.bookDao.findBookWithPublisher(p);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/book/publisherName/{pubName}")
+    public String getBooksWithPublisherName(@PathVariable String pubName, Model model) {
+        List<Book> books = this.bookDao.findBookWithPublisherName(pubName);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/book/authorId/{authId}")
+    public String getBooksWithAuthorId(@PathVariable Long authId, Model model) {
+        Author author = this.authorDao.findById(authId);
+        List<Book> books = this.bookDao.findBookWithAuthor(author);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
 }

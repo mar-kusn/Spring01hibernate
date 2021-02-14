@@ -2,7 +2,9 @@ package pl.coderslab.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
+import pl.coderslab.entity.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,6 +57,38 @@ public class BookDao {
     public List<Book> findByRatingGTE(int rating) {
         final Query query = this.entityManager.createQuery("SELECT b FROM Book b WHERE b.rating >= :toCompare");
         query.setParameter("toCompare", rating);
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    // książki które mają jakiegokwiek wydawcę
+    public List<Book> findBookWithAnyPublisher() {
+        final Query query = this.entityManager.createQuery("SELECT b FROM Book b JOIN b.publisher");
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> findBookWithPublisher(Publisher pub) {
+        final Query query = this.entityManager.createQuery("SELECT b FROM Book b WHERE b.publisher = :publisher");
+        query.setParameter("publisher", pub);
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> findBookWithPublisherName(String publisherName) {
+        final Query query = this.entityManager.createQuery("SELECT b FROM Book b WHERE b.publisher.name = :pubName");
+        query.setParameter("pubName", publisherName);
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> findBookWithAuthor(Author auth) {
+        final Query query = this.entityManager.createQuery("SELECT b FROM Book b WHERE :author MEMBER OF b.authors");
+        query.setParameter("author", auth);
         final List<Book> books = query.getResultList();
 
         return books;
