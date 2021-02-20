@@ -32,7 +32,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //    metodę wyszukującą książki dla zadanej kategorii
     @Query("SELECT b FROM Book b WHERE b.category=?1")
-    List<Book> readCustomByCategorye(Category catToFind);
+    List<Book> readCustomByCategory(Category catToFind);
 
     @Modifying
     @Transactional
@@ -43,11 +43,15 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b WHERE b.rating BETWEEN 3 AND 5")
     List<Book> readCustomRating3To5();
 
-    //    Listę książek dla zadanego wydawcy.
+    //    Listę książek bez wydawcy.
     @Query("SELECT b FROM Book b WHERE b.publisher IS NULL")
     List<Book> readCustomWithoutPublisher();
 
-    //    Pierwszą książkę z zadanej kategorii, z sortowaniem po tytule.
+    //    Listę książek dla zadanego wydawcy.
+    @Query("SELECT b FROM Book b WHERE b.publisher.name like ?1")
+    List<Book> readCustomByPublisher(String publisher);
+
+    //    książki z zadanej kategorii, z sortowaniem po tytule.
     @Query("SELECT b FROM Book b WHERE b.category.name LIKE ?1 ORDER BY b.title")
     List<Book> readCustomByCategoryNameSortByTitle(String categoryName);
 
@@ -55,6 +59,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(value = "SELECT * FROM books b " +
             "INNER JOIN categories c on b.category_id = c.id " +
             "WHERE c.name LIKE ?1 ORDER BY b.title LIMIT 1;", nativeQuery = true)
-    List<Book> readCustomByCategoryNameSortByTitleNative(String categoryName);
+    List<Book> readFirstCustomByCategoryNameSortByTitleNative(String categoryName);
 
 }

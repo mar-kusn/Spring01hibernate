@@ -105,7 +105,7 @@ public class BookRepoController {
     public String getBooksByCustomCategory(@PathVariable long categoryId,
                                      Model model) {
         Category category = this.categoryRepository.getOne(categoryId);
-        List<Book> books = this.bookRepository.readCustomByCategorye(category);
+        List<Book> books = this.bookRepository.readCustomByCategory(category);
         model.addAttribute("books", books);
 
         return "book/list";
@@ -135,8 +135,16 @@ public class BookRepoController {
         return "book/list";
     }
 
+    @GetMapping("/listbypubl/{publisher}")
+    public String getBooksWithoutPublisher(@PathVariable String publisher, Model model) {
+        List<Book> books = this.bookRepository.readCustomByPublisher(publisher);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
     @GetMapping("/listbycatnamesortbytitle1/{categoryName}")
-    public String getBooksCustomByCategoryNameSortByTitle(@PathVariable String categoryName, Model model) {
+    public String getFirstBooksCustomByCategoryNameSortByTitle(@PathVariable String categoryName, Model model) {
         List<Book> books = this.bookRepository.readCustomByCategoryNameSortByTitle(categoryName);
         model.addAttribute("books", books);
 
@@ -145,7 +153,7 @@ public class BookRepoController {
 
     @GetMapping("/listbycatnamesortbytitlenative1/{categoryName}")
     public String getBooksCustomByCategoryNameSortByTitleNative(@PathVariable String categoryName, Model model) {
-        List<Book> books = this.bookRepository.readCustomByCategoryNameSortByTitleNative(categoryName);
+        List<Book> books = this.bookRepository.readFirstCustomByCategoryNameSortByTitleNative(categoryName);
         model.addAttribute("books", books);
 
         return "book/list";
